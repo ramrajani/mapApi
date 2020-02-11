@@ -7,9 +7,15 @@ var find=require('cheerio-eq');
 var request = require('request');
 const Nightmare = require('nightmare');
 var port  = process.env.PORT || 3000;
+var timeout = require('connect-timeout')
 
 
 app.use(bodyParser.urlencoded({extended:true}));
+
+
+function haltOnTimedout (req, res, next) {
+    if (!req.timedout) next()
+  }
 
 
 
@@ -32,7 +38,9 @@ var originlon= req.query.srclon;
 var deslat= req.query.deslat;
 var deslon= req.query.deslon;
 
+console.log(req.query);
 var url = "https://directionsdebug.firebaseapp.com/?origin="+originlat+","+originlon+"&destination="+deslat+","+deslon+"&mode=walking";
+console.log(url);
 /*
 var propertiesObject = {  
     origin: "19.221512,73.164459",
@@ -59,7 +67,7 @@ request(url, function(err, response, html) {
 */
 
 var result=[];
-var  nightmare = Nightmare({ show: false, loadTimeout: 20000, executionTimeout: 30000  });
+var  nightmare = Nightmare({ show: false, loadTimeout: 10000, executionTimeout: 20000  });
 nightmare.goto(url)
 	   .wait(6000)
  .evaluate(()=>{
