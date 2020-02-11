@@ -81,7 +81,7 @@ nightmare.goto(url)
             obj.distance = array[i+3].split("\n")[0];
           result.push(obj);  
     }
-    res.send(result);
+    res.send({"result":result});
     
 }).catch(e=>console.log(e));
 
