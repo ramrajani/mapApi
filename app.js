@@ -33,6 +33,7 @@ var deslat= req.query.deslat;
 var deslon= req.query.deslon;
 
 var url = "https://directionsdebug.firebaseapp.com/?origin="+originlat+","+originlon+"&destination="+deslat+","+deslon+"&mode=walking";
+/*
 var propertiesObject = {  
     origin: "19.221512,73.164459",
     destination: "19.236280,73.130730",
@@ -42,7 +43,7 @@ var propertiesObject = {
     avoidFerries: false,
     travelMode: "WALKING"
 };
-/*
+
 request(url, function(err, response, html) {
     if(!err)
     {
