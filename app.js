@@ -20,7 +20,7 @@ function haltOnTimedout (req, res, next) {
 
 
 
-app.get("/map",timeout('15s'), haltOnTimedout,function(req,res){
+app.get("/map",[function(req,res,next){
 /*
  {  
     "origin": "19.221512,73.164459",
@@ -67,7 +67,7 @@ request(url, function(err, response, html) {
 */
 
 var result=[];
-var  nightmare = Nightmare({ show: false, loadTimeout: 8000, executionTimeout: 15000  });
+var  nightmare = Nightmare({ show: false, loadTimeout: 20000, executionTimeout: 25000  });
 nightmare.goto(url)
 	   .wait(6000)
  .evaluate(()=>{
@@ -89,14 +89,18 @@ nightmare.goto(url)
             obj.distance = array[i+3].split("\n")[0];
           result.push(obj);  
     }
-    res.send({"result":result});
+    res.locals.data=result;
+     next();
     
 }).catch(e=>console.log(e));
 
 
 
 
-})
+},function(req,res){
+               res.send(res.locals.data);
+
+}])
 
 
 
