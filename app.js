@@ -98,7 +98,7 @@ nightmare.goto(url)
 
 
 },function(req,res){
-               res.send(res.locals.data);
+               res.send({"result":res.locals.data});
 
 }])
 
