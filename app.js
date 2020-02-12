@@ -30,7 +30,7 @@ var originlon= req.query.srclon;
 var deslat= req.query.deslat;
 var deslon= req.query.deslon;
 console.log(req.query);
-await map(originlat,originlon,deslat,deslon,id);
+await map(originlat,originlon,deslat,deslon);
   res.json({ "id": id });
 
 
@@ -47,7 +47,7 @@ app.get('/job/:id', async (req, res) => {
 });
 
 
-function map(originlat,originlon,deslat,deslon,id){
+function map(originlat,originlon,deslat,deslon){
 
   var url = "https://directionsdebug.firebaseapp.com/?origin="+originlat+","+originlon+"&destination="+deslat+","+deslon+"&mode=walking";
   console.log(url);
